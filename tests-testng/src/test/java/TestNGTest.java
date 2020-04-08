@@ -31,6 +31,7 @@ public class TestNGTest {
         if (driver!=null){
             driver.quit();
         }
+        logger.info("TESTNG Завершили работу!");
     }
 
 
