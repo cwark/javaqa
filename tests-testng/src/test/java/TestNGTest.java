@@ -8,9 +8,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.Random;
 
+
+@Listeners(TestNGListener.class)
 public class TestNGTest {
 
     protected static WebDriver driver;
@@ -40,11 +44,19 @@ public class TestNGTest {
         }
     }
 
-    @Test
+    @Test(description = "Открытие страницы OTUS")
     public void openPage(){
-        driver.get("https://otus.ru");
+        driver.get(cfg.url());
+
+        try {
+            Thread.sleep((long) (Math.random() * 10000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         logger.info("Открыта страница OTUS!");
     }
+
 
     @AfterTest
     private void setDown(){
