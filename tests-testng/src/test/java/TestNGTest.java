@@ -46,7 +46,20 @@ public class TestNGTest {
 
     @Test(description = "Открытие страницы OTUS")
     public void openPage(){
-        //driver.get(cfg.url());
+        driver.get(cfg.url());
+
+        try {
+            Thread.sleep((long) (Math.random() * 10000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        logger.info("Открыта страница OTUS!");
+    }
+
+    @Test(description = "Открытие страницы OTUS")
+    public void openPageTwo(){
+        driver.get(cfg.url());
 
         try {
             Thread.sleep((long) (Math.random() * 10000));

@@ -39,6 +39,13 @@
             <version>2.13.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.influxdb/influxdb-java -->
+        <dependency>
+            <groupId>org.influxdb</groupId>
+            <artifactId>influxdb-java</artifactId>
+            <version>2.17</version>
+        </dependency>
+
     </dependencies>
 
 </project>
