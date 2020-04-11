@@ -4,7 +4,7 @@ import org.influxdb.dto.Point;
 
 public class ResultSender {
 
-    private static final InfluxDB INFLXUDB = InfluxDBFactory.connect("http://localhost:8086", "admin", "admin");
+    private static final InfluxDB INFLXUDB = InfluxDBFactory.connect("http://localhost:8086", "root", "root");
     private static final String DATABASE = "selenium";
 
     static{

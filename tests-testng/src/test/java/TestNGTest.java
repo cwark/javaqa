@@ -46,7 +46,7 @@ public class TestNGTest {
 
     @Test(description = "Открытие страницы OTUS")
     public void openPage(){
-        driver.get(cfg.url());
+        //driver.get(cfg.url());
 
         try {
             Thread.sleep((long) (Math.random() * 10000));
