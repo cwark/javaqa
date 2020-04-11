@@ -6,13 +6,11 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-import java.util.Random;
-
 
 @Listeners(TestNGListener.class)
 public class TestNGTest {
@@ -25,8 +23,8 @@ public class TestNGTest {
     private final String firefox = "firefox";
 
     @BeforeTest
-    private void setUp(){
-        switch (cfg.browser().toLowerCase()){
+    private void setUp() {
+        switch (cfg.browser().toLowerCase()) {
             case chrome: {
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
@@ -44,8 +42,13 @@ public class TestNGTest {
         }
     }
 
+    private boolean checkEven() {
+        int n = (int) (Math.random() * 100);
+        return n % 2 == 0;
+    }
+
     @Test(description = "Открытие страницы OTUS")
-    public void openPage(){
+    public void openPage() {
         driver.get(cfg.url());
 
         try {
@@ -55,10 +58,12 @@ public class TestNGTest {
         }
 
         logger.info("Открыта страница OTUS!");
+
+        Assert.assertTrue(checkEven(), "Не чётное!");
     }
 
     @Test(description = "Открытие страницы OTUS")
-    public void openPageTwo(){
+    public void openPageTwo() {
         driver.get(cfg.url());
 
         try {
@@ -68,12 +73,28 @@ public class TestNGTest {
         }
 
         logger.info("Открыта страница OTUS!");
+
+        Assert.assertTrue(checkEven(), "Не чётное!");
     }
 
+    @Test(description = "Открытие страницы OTUS")
+    public void openPageThree() {
+        driver.get(cfg.url());
+
+        try {
+            Thread.sleep((long) (Math.random() * 10000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        logger.info("Открыта страница OTUS!");
+
+        Assert.assertTrue(checkEven(), "Не чётное!");
+    }
 
     @AfterTest
-    private void setDown(){
-        if (driver!=null){
+    private void setDown() {
+        if (driver != null) {
             driver.quit();
         }
         logger.info("Завершили работу!");
