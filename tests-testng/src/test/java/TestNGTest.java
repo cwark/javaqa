@@ -17,13 +17,13 @@ public class TestNGTest {
     private void setUp(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        logger.info("TESTNG Поднят драйвер Chrome!");
+        logger.info("Поднят драйвер Chrome!");
     }
 
     @Test
     public void openPage(){
         driver.get("https://otus.ru");
-        logger.info("TESTNG Открыта страница OTUS!");
+        logger.info("Открыта страница OTUS!");
     }
 
     @AfterTest
@@ -31,7 +31,7 @@ public class TestNGTest {
         if (driver!=null){
             driver.quit();
         }
-        logger.info("TESTNG Завершили работу!");
+        logger.info("Завершили работу!");
     }
 
 
