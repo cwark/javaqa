@@ -93,7 +93,8 @@ public class JUnitTest {
 
     private boolean checkEven() {
         int n = (int) (Math.random() * 100);
-        return n % 2 == 0;
+        //return n % 2 == 0;
+        return true;
     }
 
     private void testMethod(){

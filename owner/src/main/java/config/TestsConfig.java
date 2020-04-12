@@ -9,4 +9,17 @@ public interface TestsConfig extends Config {
 
     @Key("browser")
     String browser();
+
+    @Key("influxdb.url")
+    String influxUrl();
+
+    @Key("influxdb.usr")
+    String influxUser();
+
+    @Key("influxdb.pwd")
+    String influxPassword();
+
+    @Key("influxdb.database")
+    String influxDB();
+
 }
