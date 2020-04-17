@@ -1,11 +1,8 @@
 import config.TestsConfig;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -16,80 +13,47 @@ import org.testng.annotations.Test;
 public class TestNGTest {
 
     protected static WebDriver driver;
-    private Logger logger = LogManager.getLogger(TestNGTest.class);
-    private TestsConfig cfg = ConfigFactory.create(TestsConfig.class);
-
-    private final String chrome = "chrome";
-    private final String firefox = "firefox";
+    private final Logger logger = LogManager.getLogger(TestNGTest.class);
+    private final TestsConfig cfg = ConfigFactory.create(TestsConfig.class);
 
     @BeforeTest
     private void setUp() {
-        switch (cfg.browser().toLowerCase()) {
-            case chrome: {
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                logger.info("Поднят драйвер Chrome!");
-                break;
-            }
-            case firefox: {
-                WebDriverManager.firefoxdriver();
-                driver = new FirefoxDriver();
-                logger.info("Поднят драйвер Firefox!");
-                break;
-            }
-            default:
-                throw new IllegalStateException("Unexpected value: " + cfg.browser().toLowerCase());
-        }
+        driver = WebDriverFactory.createNewDriver(cfg.browser());
     }
 
     private boolean checkEven() {
         int n = (int) (Math.random() * 100);
-        return n % 2 == 0;
+        //return n % 2 == 0;
+        return true;
+    }
+
+    private void testMethod(){
+        driver.get(cfg.url());
+
+        try {
+            Thread.sleep((long) (Math.random() * 10000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        logger.info("Открыта страница OTUS!");
+
+        Assert.assertTrue(checkEven(), "Не чётное!");
     }
 
     @Test(description = "Открытие страницы OTUS")
     public void openPage() {
-        driver.get(cfg.url());
-
-        try {
-            Thread.sleep((long) (Math.random() * 10000));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        logger.info("Открыта страница OTUS!");
-
-        Assert.assertTrue(checkEven(), "Не чётное!");
+       testMethod();
     }
 
     @Test(description = "Открытие страницы OTUS")
     public void openPageTwo() {
-        driver.get(cfg.url());
-
-        try {
-            Thread.sleep((long) (Math.random() * 10000));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        logger.info("Открыта страница OTUS!");
-
-        Assert.assertTrue(checkEven(), "Не чётное!");
+        testMethod();
     }
 
     @Test(description = "Открытие страницы OTUS")
     public void openPageThree() {
-        driver.get(cfg.url());
-
-        try {
-            Thread.sleep((long) (Math.random() * 10000));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        logger.info("Открыта страница OTUS!");
-
-        Assert.assertTrue(checkEven(), "Не чётное!");
+        testMethod();
     }
 
     @AfterTest

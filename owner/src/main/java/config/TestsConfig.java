@@ -2,13 +2,17 @@ package config;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources("classpath:config.properties")
+@Config.LoadPolicy(Config.LoadType.MERGE)
+@Config.Sources({"classpath:config.properties", "system:properties", "system:env"})
 public interface TestsConfig extends Config {
     @Key("url")
     String url();
 
     @Key("browser")
     String browser();
+
+    @Key("influxdb.use")
+    String influxUse();
 
     @Key("influxdb.url")
     String influxUrl();

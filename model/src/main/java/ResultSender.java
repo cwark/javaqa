@@ -14,7 +14,9 @@ public class ResultSender {
     }
 
     public static void send(final Point point){
-        INFLXUDB.write(point);
+        if ("on".equals(cfg.influxUse())) {
+            INFLXUDB.write(point);
+        }
     }
 
 }

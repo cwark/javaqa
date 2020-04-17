@@ -21,27 +21,9 @@ public class JUnitTest {
     private Logger logger = LogManager.getLogger(JUnitTest.class);
     private TestsConfig cfg = ConfigFactory.create(TestsConfig.class);
 
-    private final String chrome = "chrome";
-    private final String firefox = "firefox";
-
     @Before
     public void setUp(){
-        switch (cfg.browser().toLowerCase()){
-            case chrome: {
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                logger.info("Поднят драйвер Chrome!");
-                break;
-            }
-            case firefox: {
-                WebDriverManager.firefoxdriver();
-                driver = new FirefoxDriver();
-                logger.info("Поднят драйвер Firefox!");
-                break;
-            }
-            default:
-                throw new IllegalStateException("Unexpected value: " + cfg.browser().toLowerCase());
-        }
+        driver = WebDriverFactory.createNewDriver(cfg.browser());
     }
 
     @Rule
