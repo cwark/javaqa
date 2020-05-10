@@ -5,7 +5,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class WebDriverFactory {
     private final static Logger logger = LogManager.getLogger(WebDriverFactory.class);
@@ -17,18 +20,25 @@ public class WebDriverFactory {
     }
 
     public static WebDriver createNewDriver(String webDriverName, WebDriver.Options options) {
-        if (webDriverName == null) {
-            throw new IllegalStateException("Unexpected value: " + cfg.browser().toLowerCase());
+        String wDN = "chrome";
+        if (webDriverName != null && !(webDriverName.isEmpty())) {
+            wDN = webDriverName;
         }
         try {
             WebDriver driver;
 
-            Browsers bro = Browsers.valueOf(webDriverName.toUpperCase());
+            Browsers bro = Browsers.valueOf(wDN.toUpperCase());
 
             switch (bro) {
                 case CHROME: {
+                    DesiredCapabilities capabilities = new DesiredCapabilities();
+                    capabilities.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "normal");
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--start-maximized");
+                    chromeOptions.merge(capabilities);
+
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    driver = new ChromeDriver(chromeOptions);
                     logger.info("Поднят драйвер Chrome!");
                     break;
                 }

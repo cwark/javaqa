@@ -7,7 +7,9 @@ import org.influxdb.dto.Point;
 import org.junit.*;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -79,16 +81,32 @@ public class JUnitTest {
         return true;
     }
 
-    private void testMethod(){
-        driver.get(cfg.url());
+    private void sleep(long mills){
+        sleep(mills, false);
+    }
 
+    private void sleep(long mills, boolean rnd){
         try {
-            Thread.sleep((long) (Math.random() * 10000));
+            if (rnd){
+                Thread.sleep((long) (Math.random() * 10000));
+            }else{
+                Thread.sleep(mills);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void testMethod(){
+        driver.get(cfg.url());
 
         logger.info("Открыта страница OTUS!");
+
+        WebElement el = driver.findElement(By.xpath("//button[@data-modal-id='new-log-reg']"));
+
+        driver.navigate().refresh();
+
+        el.click();
 
         Assert.assertTrue("Не чётное!", checkEven());
     }

@@ -2,6 +2,7 @@ import config.TestsConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -10,16 +11,9 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(TestNGListener.class)
-public class TestNGTest {
+public class TestNGTest extends Base {
 
-    protected static WebDriver driver;
-    private final Logger logger = LogManager.getLogger(TestNGTest.class);
-    private final TestsConfig cfg = ConfigFactory.create(TestsConfig.class);
 
-    @BeforeTest
-    private void setUp() {
-        driver = WebDriverFactory.createNewDriver(cfg.browser());
-    }
 
     private boolean checkEven() {
         int n = (int) (Math.random() * 100);
@@ -36,6 +30,14 @@ public class TestNGTest {
             e.printStackTrace();
         }
 
+        driver.manage().window().setSize(new Dimension(300, 300));
+
+        try {
+            Thread.sleep((long) (Math.random() * 10000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
         logger.info("Открыта страница OTUS!");
 
         Assert.assertTrue(checkEven(), "Не чётное!");
@@ -56,13 +58,7 @@ public class TestNGTest {
         testMethod();
     }
 
-    @AfterTest
-    private void setDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-        logger.info("Завершили работу!");
-    }
+
 
 
 }
