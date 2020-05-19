@@ -110,8 +110,5 @@ public class MarketTest extends Base {
         wait.until(invisibilityOfElementLocated(By.xpath("//div[@class='n-compare-row-name i-bem' and text()='Операционная система']")));
     }
 
-    private void click(WebElement element) {
-        wait.until(elementToBeClickable(element));
-        element.click();
-    }
+
 }
