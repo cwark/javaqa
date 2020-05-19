@@ -39,16 +39,6 @@ public class MarketTest extends Base {
         compare();
     }
 
-    private void filterByMaker(String pro) {
-        String bodyData = driver.findElement(By.xpath("//body")).getAttribute("data-reqid-chain");
-
-        WebElement element = driver.findElement(By.xpath(pro));
-        click(element);
-
-        wait.until(elementToBeSelected(By.xpath(pro + "/../../input")));
-        wait.until(not(attributeToBe(By.xpath("//body"), "data-reqid-chain", bodyData)));
-    }
-
     private void sortByPrice(Direction d) {
         String bodyData = driver.findElement(By.xpath("//body")).getAttribute("data-reqid-chain");
 
@@ -57,6 +47,17 @@ public class MarketTest extends Base {
 
         wait.until(urlContains("aprice"));
         wait.until(presenceOfElementLocated(By.cssSelector("div.n-filter-sorter_sort_asc")));
+        wait.until(not(attributeToBe(By.xpath("//body"), "data-reqid-chain", bodyData)));
+    }
+
+    // фильтрация по производителю
+    private void filterByMaker(String pro) {
+        String bodyData = driver.findElement(By.xpath("//body")).getAttribute("data-reqid-chain");
+
+        WebElement element = driver.findElement(By.xpath(pro));
+        click(element);
+
+        wait.until(elementToBeSelected(By.xpath(pro + "/../../input")));
         wait.until(not(attributeToBe(By.xpath("//body"), "data-reqid-chain", bodyData)));
     }
 
