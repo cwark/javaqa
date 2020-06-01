@@ -33,9 +33,5 @@ public class MainPageTest extends Base {
 
         Assert.assertEquals(sp.getNameValue(), "Борис");
         Assert.assertEquals(sp.getFamValue(), "Берёзовиков");
-
-        logger.info(cfg.login() + ":" + cfg.password());
-
-
     }
 }
