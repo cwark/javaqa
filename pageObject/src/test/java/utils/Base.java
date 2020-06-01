@@ -1,3 +1,5 @@
+package utils;
+
 import config.TestsConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
@@ -7,19 +9,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import pages.MainPage;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 public class Base {
     protected static WebDriver driver;
-    protected final Logger logger = LogManager.getLogger(TestNGTest.class);
+    protected final Logger logger = LogManager.getLogger(Base.class);
     protected final TestsConfig cfg = ConfigFactory.create(TestsConfig.class);
     protected WebDriverWait wait;
 
     @BeforeTest
     public void setUp() {
-        logger.info("Set UP");
+        initDriver();
+    }
 
+    public void initDriver(){
         driver = WebDriverFactory.createNewDriver(cfg.browser());
         wait = new WebDriverWait(driver, 30);
     }
