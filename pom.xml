@@ -30,6 +30,7 @@
     <modules>
         <module>tests-junit</module>
         <module>tests-testng</module>
+        <module>pageObject</module>
         <module>model</module>
         <module>owner</module>
     </modules>

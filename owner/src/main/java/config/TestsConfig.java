@@ -11,6 +11,12 @@ public interface TestsConfig extends Config {
     @Key("browser")
     String browser();
 
+    @Key("lgn")
+    String login();
+
+    @Key("pwd")
+    String password();
+
     @Key("influxdb.use")
     String influxUse();
 

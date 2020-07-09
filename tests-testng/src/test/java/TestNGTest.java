@@ -1,12 +1,5 @@
-import config.TestsConfig;
-import org.aeonbits.owner.ConfigFactory;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -22,7 +15,7 @@ public class TestNGTest extends Base {
     }
 
     private void testMethod(){
-        driver.get(cfg.url());
+        Base.driver.get(cfg.url());
 
         try {
             Thread.sleep((long) (Math.random() * 10000));
@@ -30,7 +23,7 @@ public class TestNGTest extends Base {
             e.printStackTrace();
         }
 
-        driver.manage().window().setSize(new Dimension(300, 300));
+        Base.driver.manage().window().setSize(new Dimension(300, 300));
 
         try {
             Thread.sleep((long) (Math.random() * 10000));
